@@ -5,7 +5,7 @@ import state 				    						from "./rootState.js";
 import $                            from "jquery";
 
 export default {
-  addBuntingScript({ commit }){
+  addBuntingMasterScript({ commit }){
     if (typeof window.$_Bunting == "undefined") window.$_Bunting = {
         d: {}
     };
@@ -27,33 +27,39 @@ export default {
     commit("INCREMENT_QUANTITY")
   },
   initBunting({ dispatch }, pageName){
-    console.log(pageName)
     if (!state.isBuntingSet){
-      dispatch("setBuntingPageContextVars").then(() => {
-        console.log("promise resolved... moving onto next stage")
-        dispatch("addBuntingScript");
+      dispatch("setBuntingPageContextVars", pageName).then(() => {
+        dispatch("addBuntingMasterScript");
       });
     }
     else {
-      dispatch("removeBuntingScript");
+      dispatch("removeBuntingScript").then(() => {
+        dispatch("setBuntingPageContextVars", pageName).then(() => {
+          dispatch("addBuntingMasterScript");
+        });
+      });
     }
   },
   setBuntingPageContextVars({ commit }, pageName){
+    if (typeof window.$_Bunting == "undefined") window.$_Bunting = {
+        d: {}
+    };
     if (pageName === "product"){
-      console.log("hit a product page, please define some vars");
-
+      window.$_Bunting.d.vp_upc = state.currentProductBeingViewed.productId;
     }
   },
   removeBuntingScript({ commit }){
-    $("script[src*='vohzd.1.bunting.com']").remove()
+    $("script[src*='vohzd.1.bunting.com']").remove();
     $_Bunting = undefined;
     commit("IS_BUNTING_SET", false);
   },
-  updateProductKey({ commit }, event){
+  updateProductKey({ commit, dispatch }, event){
     for (let product of state.productMeta){
       if (event.currentTarget.value === product.productId){
-        commit("SET_CURRENT_PRODUCT_BEING_VIEWED", product);
+        dispatch("initBunting", "product").then(() => {
+          commit("SET_CURRENT_PRODUCT_BEING_VIEWED", product);
+        });
       }
-    }  
+    }
   }
 };
