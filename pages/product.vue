@@ -2,10 +2,10 @@
   <section class="page">
     <h2 class="mb">Cybex passeggino Eezy S Twist</h2>
     <div class="container">
-<!--
+
       <div class="main-image">
-        <img :src="productMeta[productKey].imgUrl">
-      </div>-->
+        <img :src="currentProductBeingViewed.imgUrl">
+      </div>
 
       <div class="content">
         <p>Il nuovo passeggino leggero Cybex Eezy S Twist è ultracompatto, progettato per i genitori che adorano viaggiare. Si utilizza dai 6 mesi del bimbo ai 4 anni circa (17 kg).</p>
@@ -19,19 +19,12 @@
             <option value="10485">passion pink</option>
             <option value="10487">rebel-red</option>
           </select>
-          <button type="button" name="button" @click="testage">Add to Basket</button>
-
+          <button type="button" name="button" @click="addToBasket">Add to Basket</button>
         </section>
 
-
-        <div id="magical">
-
-        </div>
-
+        <div id="magical"></div>
       </div>
-
     </div>
-
   </section>
 </template>
 
@@ -54,12 +47,7 @@ export default {
       "addToBasket",
       "initBunting",
       "updateProductKey"
-    ]),
-    testage(){
-    }/*
-    updateProductKey(a){
-     console.log(a);
-   }*/
+    ])
   },
 }
 </script>
