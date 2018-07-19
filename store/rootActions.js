@@ -5,6 +5,11 @@ import state 				    						from "./rootState.js";
 import $                            from "jquery";
 
 export default {
+  addBuntingWrapper({ commit, dispatch }, pageName){
+    dispatch("setBuntingPageContextVars", pageName).then(() => {
+      dispatch("addBuntingMasterScript");
+    });
+  },
   addBuntingMasterScript({ commit }){
     if (typeof window.$_Bunting == "undefined") window.$_Bunting = {
         d: {}
@@ -26,17 +31,13 @@ export default {
   incrementQuantity({ commit }){
     commit("INCREMENT_QUANTITY")
   },
-  initBunting({ dispatch }, pageName){
+  initBunting({ commit, dispatch }, pageName){
     if (!state.isBuntingSet){
-      dispatch("setBuntingPageContextVars", pageName).then(() => {
-        dispatch("addBuntingMasterScript");
-      });
+      dispatch("addBuntingWrapper", pageName);
     }
     else {
       dispatch("removeBuntingScript").then(() => {
-        dispatch("setBuntingPageContextVars", pageName).then(() => {
-          dispatch("addBuntingMasterScript");
-        });
+        dispatch("addBuntingWrapper", pageName);
       });
     }
   },

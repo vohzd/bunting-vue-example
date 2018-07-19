@@ -22,7 +22,15 @@
           <button type="button" name="button" @click="addToBasket">Add to Basket</button>
         </section>
 
-        <div id="magical"></div>
+        <section class="recommendations-wrapper">
+          <div class="recommendation" v-for="recommendation in productRecsMeta">
+            <a :href="recommendation.url">
+              <h1>{{ recommendation.name }}</h1>
+              <img :src="recommendation.image_url" />
+              <span>£{{ recommendation.price }}</span>
+            </a>
+          </div>
+        </section>
       </div>
     </div>
   </section>
@@ -33,6 +41,11 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
+  data(){
+    return {
+      productRecsMeta: []
+    }
+  },
   computed: {
     ...mapState([
       "currentProductBeingViewed",
@@ -41,14 +54,19 @@ export default {
   },
   mounted(){
     this.initBunting("product");
+    this.buildRecommendations();
   },
   methods: {
     ...mapActions([
       "addToBasket",
       "initBunting",
       "updateProductKey"
-    ])
-  },
+    ]),
+    buildRecommendations(){
+      this.productRecsMeta = JSON.parse(localStorage.getItem("productRecsMeta"));
+      console.log(this.productRecsMeta)
+    }
+  }
 }
 </script>
 
@@ -86,4 +104,28 @@ export default {
     font-size: 22px;
     font-weight: bold;
   }
+
+  .recommendations-wrapper {
+    display: inline-block;
+    margin-top: 32px;
+  }
+
+  .recommendation {
+    display: inline-block;
+    width: 19%;
+    margin-right: 1%;
+    text-align: center;
+
+  }
+
+  .recommendation h1 {
+    font-size: 14px;
+    margin-bottom:16px;
+  }
+
+  .recommendation img {
+    width: 100%;
+  }
+
+
 </style>
