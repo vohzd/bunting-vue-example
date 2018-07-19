@@ -1,0 +1,28 @@
+{
+  "name": "single-page-bunting-integration",
+  "version": "0.0.1",
+  "description": "integrating bunting.com",
+  "scripts": {
+    "dev": "nuxt",
+    "generate": "nuxt generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vohzd/single-page-bunting-integration.git"
+  },
+  "keywords": [
+    "nuxt",
+    "bunting",
+    "spa"
+  ],
+  "author": "vohzd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vohzd/single-page-bunting-integration/issues"
+  },
+  "homepage": "https://github.com/vohzd/single-page-bunting-integration#readme",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "nuxt-edge": "^2.0.0-25513462.d31aeaa"
+  }
+}
