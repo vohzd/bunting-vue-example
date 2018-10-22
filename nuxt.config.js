@@ -13,5 +13,8 @@ module.exports = {
       config.node = { fs: "empty", child_process: "empty" }
     }
   },
+  router: {
+    base: "/",
+  },
   mode: "spa",
 }

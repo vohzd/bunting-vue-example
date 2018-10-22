@@ -31,6 +31,7 @@
             </a>
           </div>
         </section>
+
       </div>
     </div>
   </section>
@@ -39,6 +40,9 @@
 <script>
 
 import { mapState, mapActions } from "vuex";
+
+
+import $ from "jquery";
 
 export default {
   data(){
@@ -64,10 +68,11 @@ export default {
     ]),
     buildRecommendations(){
       this.productRecsMeta = JSON.parse(localStorage.getItem("productRecsMeta"));
-      console.log(this.productRecsMeta)
     }
   }
-}
+};
+
+
 </script>
 
 <style lang="css">
