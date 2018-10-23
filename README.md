@@ -1,6 +1,4 @@
 # single-page-bunting-integration
-integrating bunting on a spa
+Integrating bunting on a SPA | Built on NuxtJS 
 
-built on NuxtJs 
-
-do the standard `npm install && npm run dev` to see a demo
+Do the standard `npm install && npm run dev` to see a demo.
